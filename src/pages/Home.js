@@ -1,10 +1,11 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 
 import Textfield from "../components/FormsUI/Textfield";
 import Select from "../components/FormsUI/Select";
+import Passwordfield from "../components/FormsUI/Passwordfield";
 import countries from "../data/countries.json";
 import countriesKeys from "../data/countries-keys.json";
 
@@ -14,6 +15,8 @@ const INITIAL_FORM_STATE = {
 	userCountry: "",
 	userCountryKey: "",
 	userPhone: "",
+	password: "",
+	passwordConfirmation: "",
 };
 
 const FORM_VALIDATION = Yup.object().shape({
@@ -24,6 +27,10 @@ const FORM_VALIDATION = Yup.object().shape({
 	userPhone: Yup.number()
 		.integer()
 		.typeError("Please enter a valid phone number")
+		.required("Required"),
+	password: Yup.string().required("Required"),
+	passwordConfirmation: Yup.string()
+		.oneOf([Yup.ref("password"), null], "Passwords didn't match")
 		.required("Required"),
 });
 
@@ -86,6 +93,20 @@ const Home = () => {
 								/>
 							</Grid>
 						</Grid>
+					</Grid>
+					<Grid item xs={12}>
+						<Passwordfield
+							name="password"
+							id="outlined-adornment-password"
+							label="Choose Password"
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<Passwordfield
+							name="passwordConfirmation"
+							id="outlined-adornment-passwordConfirmation"
+							label="Repeat Password"
+						/>
 					</Grid>
 				</Grid>
 			</Form>

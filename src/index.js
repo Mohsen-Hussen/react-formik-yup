@@ -11,7 +11,7 @@ root.render(
 		<Container>
 			<Card>
 				<CardContent>
-					<Box sx={{ marginTop: "2rem" }}>
+					<Box>
 						<App />
 					</Box>
 				</CardContent>
